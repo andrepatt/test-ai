@@ -5,4 +5,4 @@ python-docx
 markdown
 xhtml2pdf
 PyPDF2
-psycopg2
+psycopg2-binary
