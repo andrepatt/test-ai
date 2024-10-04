@@ -1,33 +1,46 @@
+import io
 import PyPDF2
-from docx import Document
-import os
-
-def read_pdf(file):
-    """Funzione per leggere il contenuto di un file PDF."""
-    pdf_reader = PyPDF2.PdfReader(file)
-    text = ""
-    for page in pdf_reader.pages:
-        text += page.extract_text()
-    return text
-
-def read_docx(file):
-    """Funzione per leggere il contenuto di un file DOCX."""
-    doc = Document(file)
-    text = "\n".join([para.text for para in doc.paragraphs])
-    return text
+import docx
 
 def handle_uploaded_file(uploaded_file):
-    """Gestisce il caricamento di file e ritorna il contenuto in formato testo."""
-    if uploaded_file.type == "application/pdf":
-        return read_pdf(uploaded_file)
-    elif uploaded_file.type in ["application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/msword"]:
-        # Salva il file caricato temporaneamente
-        with open("temp_uploaded_file.docx", "wb") as temp_file:
-            temp_file.write(uploaded_file.getbuffer())
-        # Leggi il contenuto del file DOCX
-        aru_content = read_docx("temp_uploaded_file.docx")
-        # Rimuovi il file temporaneo
-        os.remove("temp_uploaded_file.docx")
-        return aru_content
-    else:  # Tratta il file come un semplice testo
-        return uploaded_file.read().decode('utf-8', errors='ignore')
+    if uploaded_file.type == "text/plain":
+        content = uploaded_file.read().decode('utf-8')
+    elif uploaded_file.type == "application/pdf":
+        content = extract_text_from_pdf(uploaded_file)
+    elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        # Leggi il documento Word
+        doc = docx.Document(uploaded_file)
+        full_text = []
+
+        # Estrai il testo dai paragrafi
+        for para in doc.paragraphs:
+            full_text.append(para.text)
+
+        # Estrai il testo dalle tabelle
+        for table in doc.tables:
+            for row in table.rows:
+                row_data = []
+                for cell in row.cells:
+                    row_data.append(cell.text.strip())
+                full_text.append(' | '.join(row_data))
+
+        content = '\n'.join(full_text)
+        return content
+    else:
+        content = ""
+
+    return content
+
+def extract_text_from_pdf(uploaded_file):
+    pdf_reader = PyPDF2.PdfReader(uploaded_file)
+    text = ""
+    for page_num in range(len(pdf_reader.pages)):
+        text += pdf_reader.pages[page_num].extract_text()
+    return text
+
+def extract_text_from_docx(uploaded_file):
+    doc = docx.Document(uploaded_file)
+    text = ""
+    for para in doc.paragraphs:
+        text += para.text + "\n"
+    return text

@@ -6,14 +6,13 @@ from dotenv import load_dotenv
 # Configura il logging
 logging.basicConfig(level=logging.INFO)
 
-def supervisor_process(aru_revised, ufp_results):
-    # Carica il prompt per il supervisore
-    with open('prompts/supervisor_prompt.txt', 'r', encoding='utf-8') as file:
-        supervisor_prompt = file.read()
+def agent4_verify(ufp_results):
+    # Carica il prompt dal file
+    with open('prompts/agent4_prompt.txt', 'r', encoding='utf-8') as file:
+        agent4_prompt = file.read()
     
-    # Sostituisci i placeholder con i dati finali
-    prompt = supervisor_prompt.replace("[ARU_APPROVATA]", aru_revised)
-    prompt = prompt.replace("[UFP_RESULTS]", ufp_results)
+    # Sostituisci il placeholder con i risultati UFP
+    prompt = agent4_prompt.replace("[UFP_RESULTS]", ufp_results)
     
     # Carica le variabili d'ambiente dal file .env
     load_dotenv()
@@ -35,16 +34,18 @@ def supervisor_process(aru_revised, ufp_results):
         completion = openai.ChatCompletion.create(
             deployment_id=deployment_name,
             messages=conversation,
-            temperature=0.5,
+            temperature=0.0,
             stream=False
         )
         
         # Estrai il contenuto della risposta
-        supervision_report = completion['choices'][0]['message']['content']
-        
-        logging.info("Rapporto del supervisore generato.")
-        return supervision_report
+        feedback = completion['choices'][0]['message']['content']
+
+        # Prepara i log
+        agent4_log = feedback
+
+        return feedback, agent4_log
 
     except Exception as e:
-        logging.error(f"Errore nel supervisore: {e}")
-        return f"Errore nel supervisore: {e}"
+        logging.error(f"Errore nell'agente 4: {e}")
+        return f"Errore nell'agente 4: {e}", ""

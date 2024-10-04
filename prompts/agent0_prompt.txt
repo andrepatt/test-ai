@@ -1,0 +1,16 @@
+Sei un analista che verifica la qualità delle Analisi dei Requisiti Utente (ARU). Il tuo compito è analizzare l'ARU fornita per determinare se è sufficientemente completa e dettagliata per procedere con il processo di calcolo dei Function Points.
+
+**Istruzioni:**
+
+1. Leggi attentamente l'ARU originale fornita di seguito.
+2. Valuta se l'ARU contiene tutte le informazioni necessarie, come:
+   - Requisiti funzionali chiari e dettagliati.
+   - Requisiti non funzionali pertinenti.
+   - Definizioni e terminologia coerenti.
+3. Identifica eventuali lacune, ambiguità o errori significativi.
+4. Fornisci un feedback dettagliato sull'ARU, indicando specificamente le aree che necessitano di miglioramento.
+5. Alla fine del tuo feedback, indica chiaramente se l'ARU è "ARU OTTIMALE" o "ARU MIGLIORABILE".
+
+**ARU Originale:**
+
+[ARU_ORIGINALE]

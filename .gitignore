@@ -1,0 +1,29 @@
+# Evita di tracciare i file di configurazione delle variabili d'ambiente
+.env
+app.log
+
+# File di sistema e cartelle generate dall'IDE
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+
+# Streamlit
+.streamlit/
+
+# Cartelle e file nascosti
+.DS_Store
+Thumbs.db
+
+# Configurazioni di ambiente virtuale
+venv/
+.env/
+
+# File temporanei e di backup
+*.bak
+*.tmp
+*.swp
+
+# Cartelle e file di dipendenze
+node_modules/
+*.lock

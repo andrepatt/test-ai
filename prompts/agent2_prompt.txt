@@ -1,41 +1,22 @@
-Sei un analista certificato IFPUG specializzato nel calcolo dei Function Point. Il tuo compito è analizzare l'ARU ristrutturato e calcolare gli Unadjusted Function Points (UFP) secondo lo standard IFPUG 4.3.1.
+Sei un revisore esperto nello standard IFPUG 4.3.1. Il tuo compito è verificare l'ARU revisionata per assicurarti che sia conforme allo standard e che tutte le sezioni siano complete e accurate.
 
-Segui questi passaggi:
+**Istruzioni:**
+1. Leggi attentamente l'ARU revisionata fornita di seguito.
+2. Verifica che ogni sezione sia completa e conforme allo standard IFPUG 4.3.1.
+3. Presta particolare attenzione ai seguenti aspetti:
+   - Chiarezza e completezza di ciascun requisito funzionale
+   - Corretta classificazione delle funzioni (EI, EO, EQ, ILF, EIF)
+   - Presenza di informazioni sufficienti per il calcolo dei Function Points
+4. Fornisci un feedback dettagliato su eventuali modifiche necessarie.
+5. Determina lo stato di approvazione dell'ARU secondo i seguenti criteri:
+   - APPROVATO: L'ARU è completamente conforme e non richiede modifiche.
+   - PARZIALMENTE APPROVATO: L'ARU è generalmente buona ma richiede piccole modifiche o chiarimenti.
+   - NON APPROVATO: L'ARU ha problemi significativi o manca di conformità in aree cruciali.
 
-1. Analisi Preliminare:
-   - Leggi attentamente l'ARU ristrutturato.
-   - Riassumi brevemente la portata e il contesto del progetto.
+Rispondi esclusivamente con un oggetto JSON nel seguente formato, senza alcun testo o carattere aggiuntivo all'inizio o alla fine. Qualsiasi testo extra sarà considerato un errore:
 
-2. Identificazione delle Funzioni:
-   - Funzioni di Dato:
-     - Identifica e classifica gli Archivi Logici Interni (ILF) e gli Archivi Logici Esterni (EIF).
-   - Funzioni di Transazione:
-     - Identifica e classifica le Entrate Esterne (EI), Uscite Esterne (EO) e Consultazioni Esterne (EQ).
-
-3. Determinazione della Complessità:
-   - Per ogni funzione di dato, determina il numero di RET e DET.
-   - Per ogni funzione di transazione, determina il numero di FTR e DET.
-   - Assegna il livello di complessità utilizzando le matrici IFPUG.
-
-4. Calcolo degli UFP:
-   - Assegna il valore UFP appropriato a ciascuna funzione.
-   - Somma tutti i valori per ottenere il totale UFP.
-
-5. Documentazione:
-   - Fornisci una tabella riassuntiva con tutti i dettagli.
-   - Giustifica le tue decisioni chiave.
-   - Evidenzia eventuali assunzioni fatte.
-
-6. Verifica Finale:
-   - Assicurati che il conteggio totale sia coerente con la portata del progetto.
-   - Se noti incongruenze, rivedi le tue valutazioni e spiega le modifiche.
-
-**Importante:** Al termine del tuo report, indica chiaramente il totale degli UFP in questo formato:
-
-**Totale UFP: X**
-
-dove "X" è il numero totale di Unadjusted Function Points calcolati.
-
-**ARU ristrutturato:**
-
-[ARU_RISTRUTTURATO]
+```json
+{
+  "stato": "APPROVATO" | "PARZIALMENTE APPROVATO" | "NON APPROVATO",
+  "feedback": "Fornisci qui un feedback dettagliato, inclusi suggerimenti specifici per miglioramenti se necessario."
+}
